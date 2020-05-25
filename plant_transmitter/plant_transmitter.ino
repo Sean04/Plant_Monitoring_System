@@ -55,6 +55,7 @@ void loop() {
   data.light = analogRead(PHOTO_PIN);
   //  Moisture sensor
   data.moisture = analogRead(MOIST_PIN);
+  // Humidity sensor
   data.humidity = dht.readHumidity();
 
 //Send the data struct and the size of the data struct

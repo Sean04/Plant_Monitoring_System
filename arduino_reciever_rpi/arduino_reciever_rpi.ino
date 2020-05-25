@@ -32,17 +32,29 @@ void setup() {
 void loop() {
   if (radio.available()){
     radio.read(&data, sizeof(data));
+    data.moisture = map(data.moisture, 1023, 261, 0, 100);
+
+//  LCD Displays
     lcd.clear();
     lcd.print("Temp: ");
     lcd.print(data.temperature);
     lcd.setCursor(0,1);
     lcd.print("Light: ");
     lcd.print(data.light);
-    Serial.print("Temperature:"); Serial.println(data.temperature);
-    Serial.println(data.light);
-    data.moisture = map(data.moisture, 1023, 261, 0, 100);
-    Serial.println(data.moisture);
-    Serial.println(data.humidity);
+
+//  Serial data out
+    Serial.print("Temperature:"); 
+    Serial.print(data.temperature);
+    Serial.print(";");
+    Serial.print("Light:");
+    Serial.print(data.light);
+    Serial.print(";");
+    Serial.print("Soil_Moisture:");
+    Serial.print(data.moisture);
+    Serial.print(";");
+    Serial.print("Humidity:");
+    Serial.print(data.humidity);
+    Serial.println(";");
     delay(5000);
   }
 }
